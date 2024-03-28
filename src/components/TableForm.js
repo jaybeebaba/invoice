@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, {useState, useContext } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
 import { State } from "../context/stateContext";
+import { products } from "../products";
 
 export default function TableForm() {
+  const [selected, setSelected] = useState("")
   const {
     description,
     setDescription,
@@ -23,6 +25,17 @@ export default function TableForm() {
     editRow,
   } = useContext(State);
 
+  const productList = products.map(product => <option value={product.name}>{product.name}</option>)
+
+  const handleDescriptionChange = (e) =>{
+    setDescription(e.target.value)
+    const product = products.find(product => product.name === e.target.value)
+    setPrice(product.price)
+  }
+
+  // const setProductPrice = (des) =>{
+  //     const product = sel
+  // }
   return (
     <>
       <ToastContainer position="top-right" theme="colored" />
@@ -30,15 +43,17 @@ export default function TableForm() {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col md:mt-5">
           <label htmlFor="description">Item description</label>
-          <input
-            type="text"
+          <select 
+            className="my-2 border-2 h-12"
             name="description"
             id="description"
-            placeholder="Item description"
-            maxLength={96}
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+            onChange={handleDescriptionChange}
+          >
+            <option value="">Select a product</option>
+          {productList}
+          </select>
+         
         </div>
 
         <div className="md:grid grid-cols-3 gap-10">
@@ -64,7 +79,7 @@ export default function TableForm() {
               placeholder="Price"
               maxLength={33}
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              disabled
             />
           </div>
 
