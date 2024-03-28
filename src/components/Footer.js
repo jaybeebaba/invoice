@@ -16,6 +16,7 @@ export default function Footer() {
           </li>
          
         </ul>
+        <h1 className="text-3xl text-center mt-5">Thanks for your patronage</h1>
       </footer>
     </>
   );
