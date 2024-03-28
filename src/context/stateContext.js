@@ -26,13 +26,29 @@ export default function StateContext({ children }) {
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
   const [width] = useState(641);
-  // const [invoices, setInvoices] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
+
+
   const componentRef = useRef();
 
+
+  const convertDateToString = () => {
+    // Create a Date object using the input value
+    let dateObject = new Date(invoiceDate);
+    
+    // Format the date as a string (e.g., "March 27, 2024")
+    let dateString = dateObject.toLocaleDateString('en-US', {  
+        year: 'numeric',  
+        month: 'long',  
+        day: 'numeric'  
+    });
+    
+    // Update the state with the formatted date string
+   setInvoiceDate(dateString);
+};
   const handlePrint = () => {
     window.print();
   };
@@ -99,7 +115,7 @@ export default function StateContext({ children }) {
 
   // Use collect.js to calculate the total amount of items in the table. This is a much better function than the commented one above.
   const calculateTotal = () => {
-    const allItems = list.map((item) => item.price);
+    const allItems = list.map((item) => item.amount);
 
     setTotal(collect(allItems).sum());
   };
@@ -176,6 +192,7 @@ export default function StateContext({ children }) {
     deleteRow,
     showLogoutModal,
     setShowLogoutModal,
+    convertDateToString
   };
 
   return <State.Provider value={context}>{children}</State.Provider>;
