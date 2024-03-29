@@ -7,7 +7,6 @@ import { State } from "../context/stateContext";
 import { products } from "../products";
 
 export default function TableForm() {
-  const [selected, setSelected] = useState("")
   const {
     description,
     setDescription,
