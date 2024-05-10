@@ -30,7 +30,7 @@ export default function Table() {
       </table>
 
       <div>
-        <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
+        <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold ">
           NGN {total.toFixed(2)}
         </h2>
       </div>

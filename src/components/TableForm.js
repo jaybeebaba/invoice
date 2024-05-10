@@ -32,9 +32,6 @@ export default function TableForm() {
     setPrice(product.price)
   }
 
-  // const setProductPrice = (des) =>{
-  //     const product = sel
-  // }
   return (
     <>
       <ToastContainer position="top-right" theme="colored" />
@@ -135,6 +132,7 @@ export default function TableForm() {
         <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">
           NGN {total.toFixed(2)}
         </h2>
+       
       </div>
     </>
   );
